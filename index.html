@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Define o conjunto de caracteres -->
+  <meta charset="UTF-8">
+  <!-- Garante que o site seja responsivo em dispositivos móveis -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Define o título da aba do navegador -->
+  <title>Cadastro - RPG</title>
+
+  <!-- Estilos internos da página -->
+  <style>
+    /* Define o estilo geral do corpo da página */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif; /* Fonte legível */
+      background-color: #1a1a2e; /* Fundo escuro roxinho */
+      color: #ffffff; /* Texto branco */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Ocupa 100% da altura da tela */
+    }
+
+    /* Estilo do contêiner principal */
+    .container {
+      background-color: #3f3d56; /* Roxo mais claro */
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      width: 300px;
+    }
+
+    /* Estilo do título */
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #c084fc; /* Roxinho mais vibrante */
+    }
+
+    /* Estilo dos campos de input */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    /* Estilo do botão */
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #7c3aed; /* Roxo forte */
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Efeito ao passar o mouse no botão */
+    button:hover {
+      background-color: #6b21a8;
+    }
+  </style>
+</head>
+<body>
+  <!-- Div principal que envolve o formulário -->
+  <div class="container">
+    <!-- Título da página -->
+    <h1>Bem vindo(a) ao RPG WORLD</h1>
+    <!-- Formulário de cadastro -->
+    <form action="/cadastro" method="POST">
+      <!-- Campo de nome -->
+      <input type="text" name="nome" placeholder="Nome do jogador" required>
+      <!-- Campo de email -->
+      <input type="email" name="email" placeholder="Digite seu email" required>
+      <!-- Campo de senha -->
+      <input type="password" name="senha" placeholder="Digite sua senha" required>
+      <input type="number" name="idade" placeholder="Digite sua idade" required>
+      <input type="text" name="serieFavorita" placeholder="Digite sua série favorita" required>
+      <!-- Botão de envio -->
+      <button type="submit">Cadastre-se</button>
+    </form>
+  </div>
+</body>
+</html>
