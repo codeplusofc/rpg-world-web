@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tela RPG</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: radial-gradient(circle at top, #1a012d, #0b0016);
+        color: #fff;
+        display: flex;
+        height: 100vh;
+    }
+
+    /* Coluna lateral */
+    .sidebar {
+        width: 130px;
+        background: linear-gradient(180deg, #2a0055, #160033);
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        border-right: 2px solid rgba(173, 94, 255, 0.6);
+        box-shadow: inset 0 0 10px rgba(173, 94, 255, 0.3);
+    }
+
+    .sidebar button {
+        padding: 10px;
+        background: linear-gradient(135deg, #a64dff, #6a1b9a);
+        border: none;
+        border-radius: 6px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 0 10px rgba(166, 77, 255, 0.5);
+    }
+
+    .sidebar button:hover {
+        background: linear-gradient(135deg, #bf80ff, #7a1fcc);
+        box-shadow: 0 0 15px rgba(191, 128, 255, 0.7);
+        transform: scale(1.05);
+    }
+
+    /* Área principal com 4 chats */
+    .main {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .chat-box {
+        background: linear-gradient(180deg, rgba(216, 0, 11, 0.9), rgba(25, 0, 45, 0.9));
+        border: 2px solid rgba(191, 128, 255, 0.4);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 0 15px rgba(166, 77, 255, 0.2);
+        backdrop-filter: blur(6px);
+    }
+        .chat-box-2 {
+        background: linear-gradient(180deg, rgba(4, 1, 177, 0.9), rgba(25, 0, 45, 0.9));
+        border: 2px solid rgba(191, 128, 255, 0.4);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 0 15px rgba(166, 77, 255, 0.2);
+        backdrop-filter: blur(6px);
+    }
+        .chat-box-3 {
+        background: linear-gradient(180deg, rgba(2, 190, 181, 0.9), rgba(25, 0, 45, 0.9));
+        border: 2px solid rgba(191, 128, 255, 0.4);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 0 15px rgba(166, 77, 255, 0.2);
+        backdrop-filter: blur(6px);
+    }
+        .chat-box-4 {
+        background: linear-gradient(180deg, rgba(149, 202, 3, 0.9), rgba(25, 0, 45, 0.9));
+        border: 2px solid rgba(191, 128, 255, 0.4);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 0 15px rgba(166, 77, 255, 0.2);
+        backdrop-filter: blur(6px);
+    }
+
+    .chat-header {
+        background: linear-gradient(90deg, #6a1b9a, #a64dff);
+        padding: 6px 10px;
+        font-weight: bold;
+        border-bottom: 1px solid rgba(191, 128, 255, 0.4);
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    }
+
+    .chat-messages {
+        flex: 1;
+        padding: 10px;
+        overflow-y: auto;
+        font-size: 14px;
+    }
+
+    .chat-messages p {
+        margin: 4px 0;
+    }
+
+    .chat-input {
+        border-top: 1px solid rgba(128, 255, 160, 0.4);
+        display: flex;
+    }
+
+    .chat-input input {
+        flex: 1;
+        padding: 8px;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        background: rgba(255, 255, 255, 0.05);
+        color: white;
+    }
+
+    .chat-input button {
+        padding: 8px 12px;
+        background: linear-gradient(135deg, #a64dff, #6a1b9a);
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.2s;
+        box-shadow: 0 0 8px rgba(166, 77, 255, 0.4);
+    }
+
+    .chat-input button:hover {
+        background: linear-gradient(135deg, #bf80ff, #7a1fcc);
+        box-shadow: 0 0 12px rgba(191, 128, 255, 0.7);
+    }
+
+    /* Scroll personalizado */
+    .chat-messages::-webkit-scrollbar {
+        width: 6px;
+    }
+    .chat-messages::-webkit-scrollbar-thumb {
+        background: rgba(168, 255, 128, 0.4);
+        border-radius: 4px;
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+        .main {
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(4, 1fr);
+        }
+        .sidebar {
+            width: 90px;
+        }
+        .sidebar button {
+            font-size: 12px;
+            padding: 6px;
+        }
+    }
+</style>
+</head>
+<body>
+
+    <!-- Coluna lateral -->
+    <div class="sidebar">
+        <button>Inventário</button>
+        <button>Mapa</button>
+        <button>Status</button>
+        <button>Config</button>
+    </div>
+
+    <!-- Área central -->
+    <div class="main">
+        <div class="chat-box">
+            <div class="chat-header">Chat 1</div>
+            <div class="chat-messages">
+                <p><b>NPC:</b> Bem-vindo ao jogo!</p>
+            </div>
+            <div class="chat-input">
+                <input type="text" placeholder="Digite sua mensagem...">
+                <button>Enviar</button>
+            </div>
+        </div>
+
+        <div class="chat-box-2">
+            <div class="chat-header">Chat 2</div>
+            <div class="chat-messages"></div>
+            <div class="chat-input">
+                <input type="text" placeholder="Digite sua mensagem...">
+                <button>Enviar</button>
+            </div>
+        </div>
+
+        <div class="chat-box-3">
+            <div class="chat-header">Chat 3</div>
+            <div class="chat-messages"></div>
+            <div class="chat-input">
+                <input type="text" placeholder="Digite sua mensagem...">
+                <button>Enviar</button>
+            </div>
+        </div>
+
+        <div class="chat-box-4">
+            <div class="chat-header">Chat 4</div>
+            <div class="chat-messages"></div>
+            <div class="chat-input">
+                <input type="text" placeholder="Digite sua mensagem...">
+                <button>Enviar</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
