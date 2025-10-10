@@ -1,182 +1,263 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tela RPG</title>
-<style>
-    body {
-        margin: 0;
-        font-family: 'Segoe UI', Arial, sans-serif;
-        background: radial-gradient(circle at top, #1a012d, #0b0016);
-        color: #fff;
-        display: flex;
-        height: 100vh;
-    }
-
-    /* Coluna lateral */
-    .sidebar {
-        width: 130px;
-        background: linear-gradient(180deg, #2a0055, #160033);
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        border-right: 2px solid rgba(173, 94, 255, 0.6);
-        box-shadow: inset 0 0 10px rgba(173, 94, 255, 0.3);
-    }
-
-    .sidebar button {
-        padding: 10px;
-        background: linear-gradient(135deg, #a64dff, #6a1b9a);
-        border: none;
-        border-radius: 6px;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.2s;
-        box-shadow: 0 0 10px rgba(166, 77, 255, 0.5);
-    }
-
-    .sidebar button:hover {
-        background: linear-gradient(135deg, #bf80ff, #7a1fcc);
-        box-shadow: 0 0 15px rgba(191, 128, 255, 0.7);
-        transform: scale(1.05);
-    }
-
-    /* Área principal com 4 chats */
-    .main {
-        flex: 1;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        gap: 12px;
-        padding: 12px;
-    }
-
-    .chat-box {
-        background: linear-gradient(180deg, rgba(216, 0, 11, 0.9), rgba(25, 0, 45, 0.9));
-        border: 2px solid rgba(191, 128, 255, 0.4);
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        box-shadow: 0 0 15px rgba(166, 77, 255, 0.2);
-        backdrop-filter: blur(6px);
-        background-image: url('https://images.justwatch.com/backdrop/178039414/s640/diarios-de-um-vampiro');
-    }
-        .chat-box-2 {
-        background: linear-gradient(180deg, rgba(4, 1, 177, 0.9), rgba(25, 0, 45, 0.9));
-        border: 2px solid rgba(191, 128, 255, 0.4);
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        box-shadow: 0 0 15px rgba(166, 77, 255, 0.2);
-        backdrop-filter: blur(6px);
-        background-image: url('https://seriesbrasil.com.br/wp-content/uploads/2020/06/the-originals.jpg');
-    }
-        .chat-box-3 {
-        background: linear-gradient(180deg, rgba(2, 190, 181, 0.9), rgba(25, 0, 45, 0.9));
-        border: 2px solid rgba(191, 128, 255, 0.4);
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        box-shadow: 0 0 15px rgba(166, 77, 255, 0.2);
-        backdrop-filter: blur(6px);
-        background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdB25GD9MT4A4aWW4GPMptXWyQkasZRcp2YmdpHBBQ9zViQ0rN22at8EcQdPSC7JwoQAiS8a2y_JP-H9YRWLEAnjEV_r6FPyv2iAtC6FQ5LbfgDAWjLgZPJRO7aomuCEkPifHUabMT5hg/s1600/3346219.png-r_851_315-f_jpg-q_x-xxyxx.jpg');
-    }
-        .chat-box-4 {
-        background: linear-gradient(180deg, rgba(149, 202, 3, 0.9), rgba(25, 0, 45, 0.9));
-        border: 2px solid rgba(191, 128, 255, 0.4);
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        box-shadow: 0 0 15px rgba(166, 77, 255, 0.2);
-        backdrop-filter: blur(6px);
-         background-image: url('https://recreio.com.br/wp-content/uploads/legacy/2021/02/19/supernatural-na-amazon-prime-video-1227740.jpg');
-    }
-
-    .chat-header {
-        background: linear-gradient(90deg, #6a1b9a, #a64dff);
-        padding: 6px 10px;
-        font-weight: bold;
-        border-bottom: 1px solid rgba(191, 128, 255, 0.4);
-        text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
-    }
-
-    .chat-messages {
-        flex: 1;
-        padding: 10px;
-        overflow-y: auto;
-        font-size: 14px;
-    }
-
-    .chat-messages p {
-        margin: 4px 0;
-    }
-
-    .chat-input {
-        border-top: 1px solid rgba(128, 255, 160, 0.4);
-        display: flex;
-    }
-
-    .chat-input input {
-        flex: 1;
-        padding: 8px;
-        border: none;
-        outline: none;
-        font-size: 14px;
-        background: rgba(255, 255, 255, 0.05);
-        color: white;
-    }
-
-    .chat-input button {
-        padding: 8px 12px;
-        background: linear-gradient(135deg, #a64dff, #6a1b9a);
-        border: none;
-        color: white;
-        cursor: pointer;
-        font-weight: bold;
-        transition: all 0.2s;
-        box-shadow: 0 0 8px rgba(166, 77, 255, 0.4);
-    }
-
-    .chat-input button:hover {
-        background: linear-gradient(135deg, #bf80ff, #7a1fcc);
-        box-shadow: 0 0 12px rgba(191, 128, 255, 0.7);
-    }
-
-    /* Scroll personalizado */
-    .chat-messages::-webkit-scrollbar {
-        width: 6px;
-    }
-    .chat-messages::-webkit-scrollbar-thumb {
-        background: rgba(168, 255, 128, 0.4);
-        border-radius: 4px;
-    }
-
-    /* Responsivo */
-    @media (max-width: 768px) {
-        .main {
-            grid-template-columns: 1fr;
-            grid-template-rows: repeat(4, 1fr);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela RPG</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            background: radial-gradient(circle at top, #1a012d, #0b0016);
+            color: #e0e0e0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
         }
+
         .sidebar {
-            width: 90px;
+            width: 150px;
+            background: linear-gradient(180deg, #2a0055, #160033);
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-right: 2px solid rgba(173, 94, 255, 0.5);
+            box-shadow: inset 0 0 12px rgba(173, 94, 255, 0.2);
+            transition: width 0.3s ease;
         }
+
         .sidebar button {
-            font-size: 12px;
-            padding: 6px;
+            padding: 12px;
+            background: linear-gradient(135deg, #a64dff, #6a1b9a);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(166, 77, 255, 0.4);
+            position: relative;
+            overflow: hidden;
         }
-    }
-</style>
+
+        .sidebar button:hover {
+            background: linear-gradient(135deg, #bf80ff, #7a1fcc);
+            box-shadow: 0 6px 20px rgba(191, 128, 255, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .sidebar button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+        }
+
+        .sidebar button:hover::after {
+            width: 200px;
+            height: 200px;
+        }
+
+        .main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 15px;
+            padding: 20px;
+            background: rgba(11, 0, 22, 0.3);
+        }
+
+        .chat-box, .chat-box-2, .chat-box-3, .chat-box-4 {
+            background: linear-gradient(180deg, rgba(25, 0, 45, 0.95), rgba(10, 0, 20, 0.95));
+            border: 1px solid rgba(191, 128, 255, 0.3);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(166, 77, 255, 0.15);
+            backdrop-filter: blur(8px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .chat-box:hover, .chat-box-2:hover, .chat-box-3:hover, .chat-box-4:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(166, 77, 255, 0.3);
+        }
+
+        .chat-box {
+            background-image: url('https://images.justwatch.com/backdrop/178039414/s640/diarios-de-um-vampiro');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .chat-box-2 {
+            background-image: url('https://seriesbrasil.com.br/wp-content/uploads/2020/06/the-originals.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .chat-box-3 {
+            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdB25GD9MT4A4aWW4GPMptXWyQkasZRcp2YmdpHBBQ9zViQ0rN22at8EcQdPSC7JwoQAiS8a2y_JP-H9YRWLEAnjEV_r6FPyv2iAtC6FQ5LbfgDAWjLgZPJRO7aomuCEkPifHUabMT5hg/s1600/3346219.png-r_851_315-f_jpg-q_x-xxyxx.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .chat-box-4 {
+            background-image: url('https://recreio.com.br/wp-content/uploads/legacy/2021/02/19/supernatural-na-amazon-prime-video-1227740.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .chat-header {
+            background: linear-gradient(90deg, #6a1b9a, #a64dff);
+            padding: 10px 15px;
+            font-weight: 700;
+            font-size: 16px;
+            border-bottom: 1px solid rgba(191, 128, 255, 0.3);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+            letter-spacing: 0.5px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.6;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .chat-messages p {
+            margin: 6px 0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            max-width: 80%;
+        }
+
+        .chat-messages .user-message {
+            background: rgba(166, 77, 255, 0.2);
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .chat-messages .npc-message {
+            background: rgba(255, 255, 255, 0.05);
+            margin-right: auto;
+        }
+
+        .chat-input {
+            border-top: 1px solid rgba(128, 255, 160, 0.3);
+            display: flex;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            background: transparent;
+            color: #e0e0e0;
+            transition: background 0.3s ease;
+        }
+
+        .chat-input input:focus {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-input button {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #a64dff, #6a1b9a);
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(166, 77, 255, 0.4);
+        }
+
+        .chat-input button:hover {
+            background: linear-gradient(135deg, #bf80ff, #7a1fcc);
+            box-shadow: 0 6px 15px rgba(191, 128, 255, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(168, 255, 128, 0.5);
+            border-radius: 4px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .main {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, minmax(200px, 1fr));
+                padding: 10px;
+            }
+
+            .sidebar {
+                width: 100px;
+                padding: 10px;
+            }
+
+            .sidebar button {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .chat-header {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+
+            .chat-messages {
+                font-size: 13px;
+                padding: 10px;
+            }
+
+            .chat-input input {
+                font-size: 13px;
+                padding: 8px;
+            }
+
+            .chat-input button {
+                font-size: 13px;
+                padding: 8px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 80px;
+            }
+
+            .sidebar button {
+                font-size: 11px;
+                padding: 6px;
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <!-- Coluna lateral -->
     <div class="sidebar">
         <button>Inventário</button>
         <button>Mapa</button>
@@ -184,16 +265,15 @@
         <button>Config</button>
     </div>
 
-    <!-- Área central -->
     <div class="main">
         <div class="chat-box">
             <div class="chat-header">Chat 1</div>
             <div class="chat-messages">
-                <p><b>NPC:</b> Bem-vindo ao jogo!</p>
+                <p class="npc-message"><b>NPC:</b> Bem-vindo ao jogo!</p>
             </div>
             <div class="chat-input">
                 <input type="text" placeholder="Digite sua mensagem...">
-                <button>Enviar</button>
+                <button onclick="sendMessage(this)">Enviar</button>
             </div>
         </div>
 
@@ -202,7 +282,7 @@
             <div class="chat-messages"></div>
             <div class="chat-input">
                 <input type="text" placeholder="Digite sua mensagem...">
-                <button>Enviar</button>
+                <button onclick="sendMessage(this)">Enviar</button>
             </div>
         </div>
 
@@ -211,7 +291,7 @@
             <div class="chat-messages"></div>
             <div class="chat-input">
                 <input type="text" placeholder="Digite sua mensagem...">
-                <button>Enviar</button>
+                <button onclick="sendMessage(this)">Enviar</button>
             </div>
         </div>
 
@@ -220,10 +300,35 @@
             <div class="chat-messages"></div>
             <div class="chat-input">
                 <input type="text" placeholder="Digite sua mensagem...">
-                <button>Enviar</button>
+                <button onclick="sendMessage(this)">Enviar</button>
             </div>
         </div>
     </div>
 
+    <script>
+        function sendMessage(button) {
+            const chatInput = button.previousElementSibling;
+            const messageText = chatInput.value.trim();
+            if (messageText === '') return;
+
+            const chatMessages = button.parentElement.previousElementSibling;
+            const messageElement = document.createElement('p');
+            messageElement.classList.add('user-message');
+            messageElement.innerHTML = `<b>Você:</b> ${messageText}`;
+            chatMessages.appendChild(messageElement);
+
+            chatInput.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        document.querySelectorAll('.chat-input input').forEach(input => {
+            input.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    const button = input.nextElementSibling;
+                    sendMessage(button);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

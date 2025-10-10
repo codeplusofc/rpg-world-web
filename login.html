@@ -1,100 +1,174 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <!-- Define o conjunto de caracteres -->
-  <meta charset="UTF-8">
-  <!-- Garante que o site seja responsivo em dispositivos móveis -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Define o título da aba do navegador -->
-  <title>LOGIN - RPG</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN - RPG</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            background: radial-gradient(circle at top, #1a012d, #0b0016);
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-  <!-- Estilos internos da página -->
-  <style>
-    /* Define o estilo geral do corpo da página */
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif; /* Fonte legível */
-      background-color: #1a1a2e; /* Fundo escuro roxinho */
-      color: #ffffff; /* Texto branco */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh; /* Ocupa 100% da altura da tela */
-    }
+        .container {
+            background: linear-gradient(180deg, rgba(25, 0, 45, 0.95), rgba(10, 0, 20, 0.95));
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(166, 77, 255, 0.3);
+            width: 320px;
+            backdrop-filter: blur(8px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    /* Estilo do contêiner principal */
-    .container {
-      background-color: #3f3d56; /* Roxo mais claro */
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-      width: 300px;
-    }
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(166, 77, 255, 0.5);
+        }
 
-    /* Estilo do título */
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #c084fc; /* Roxinho mais vibrante */
-    }
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #c084fc;
+            font-weight: 700;
+            font-size: 24px;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.5px;
+        }
 
-    /* Estilo dos campos de input */
-    input[type="text"],
-    input[type="email"],
-    input[type="password"],
-    input[type="number"] {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: none;
-      border-radius: 5px;
-    }
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #e0e0e0;
+            font-size: 14px;
+            outline: none;
+            transition: background 0.3s ease;
+            box-sizing: border-box;
+        }
 
-    /* Estilo do botão */
-    button {
-      width: 106%;
-      padding: 10px;
-      background-color: #7c3aed; /* Roxo forte */
-      border: none;
-      border-radius: 5px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 8px rgba(166, 77, 255, 0.4);
+        }
 
-    /* Efeito ao passar o mouse no botão */
-    button:hover {
-      background-color: #6b21a8;
-    }
-      .signup-link {
-      display: block;
-      margin-top: 10px;
-      color: #c084fc;
-      text-decoration: none;
-      font-size: 14px;
-      padding-left: 50px;
-    }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #a64dff, #6a1b9a);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(166, 77, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
 
-    .signup-link:hover {
-      text-decoration: underline;
-    }
-  </style>
+        button:hover {
+            background: linear-gradient(135deg, #bf80ff, #7a1fcc);
+            box-shadow: 0 6px 15px rgba(191, 128, 255, 0.7);
+            transform: translateY(-2px);
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+        }
+
+        button:hover::after {
+            width: 200px;
+            height: 200px;
+        }
+
+        .signup-link {
+            display: block;
+            margin-top: 15px;
+            color: #c084fc;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+
+        .signup-link:hover {
+            color: #bf80ff;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 280px;
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            input[type="email"],
+            input[type="password"] {
+                padding: 10px;
+                font-size: 13px;
+            }
+
+            button {
+                padding: 10px;
+                font-size: 13px;
+            }
+
+            .signup-link {
+                font-size: 13px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Div principal que envolve o formulário -->
-  <div class="container">
-    <!-- Título da página -->
-    <h1>Bem vindo(a) ao RPG WORLD</h1>
-    <!-- Formulário de cadastro -->
-    <form action="/login" method="POST">
-      <input type="email" name="email" placeholder="Digite seu email" required>
-      <!-- Campo de senha -->
-      <input type="password" name="senha" placeholder="Digite sua senha" required>
-      <!-- Botão de envio -->
-      <button type="submit">Login</button>
-    </form>
-    <a href="index.html" class="signup-link">Não tem conta? Cadastre-se aqui</a>
-  </div>
+    <div class="container">
+        <h1>Bem-vindo(a) ao RPG WORLD</h1>
+        <form id="loginForm">
+            <input type="email" name="email" placeholder="Digite seu email" required>
+            <input type="password" name="senha" placeholder="Digite sua senha" required>
+            <button type="submit">Login</button>
+        </form>
+        <a href="index.html" class="signup-link">Não tem conta? Cadastre-se aqui</a>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = this.querySelector('input[name="email"]').value.trim();
+            const password = this.querySelector('input[name="senha"]').value.trim();
+            
+            if (email && password) {
+                window.location.href = 'tela.html';
+            } else {
+                alert('Por favor, preencha todos os campos.');
+            }
+        });
+    </script>
 </body>
 </html>
