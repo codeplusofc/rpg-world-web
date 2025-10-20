@@ -1,0 +1,8 @@
+{
+  "name": "mensagem-rpg",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "pusher": "^6.0.0"
+  }
+}
